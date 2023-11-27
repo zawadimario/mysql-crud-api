@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
 	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
@@ -26,7 +27,7 @@ func UpdateAlbum(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("Invalid request payload: %v", err), http.StatusBadRequest)
 		return
 	}
-	err = updateAlbumById(id, updatedAlbum, db)
+	err = updateAlbumById(id, updatedAlbum, database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error updating album: %v", err), http.StatusInternalServerError)
 		return
