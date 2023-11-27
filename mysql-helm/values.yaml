@@ -1,0 +1,38 @@
+# Define image values
+image:
+  repository: mysql
+  tag: 8.0.29
+  pullPolicy: IfNotPresent
+
+# Define replicas for database deployment
+replicaCount: 1
+
+# Define database properties
+auth:
+  db_name: sakila
+  username: tectel
+  password: tectel
+  rootPassword: password
+  configuration: |-
+    [mysqld]
+    character-set-server=utf8mb4
+    max_allowed_packet=1G
+    innodb_buffer_pool_size=1G
+
+# Define container arguments
+containerArguments: |-
+  - --disable-log-bin
+  - --default-authentication-plugin=mysql_native_password
+  - --datadir 
+  - /var/lib/mysql
+
+# Defile PVC specs
+persistentResources:
+  storage: 20Gi
+  accessModes: ReadWriteOnce
+
+# Define K8s service specs
+service:
+  type: NodePort
+  nodePort: 31214
+  port: 3306

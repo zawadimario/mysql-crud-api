@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb-{{ .Release.Name }}
+  labels:
+    app: mysql-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app: mysql-{{ .Release.Name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-{{ .Release.Name }}
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      serviceAccountName: mysql-{{ .Release.Name }}-service-account
+      containers:
+        - args:
+{{ .Values.containerArguments | indent 12 }}
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "true"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-{{ .Release.Name }}-dbsecret
+                  key: password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-{{ .Release.Name }}-dbsecret
+                  key: dbuser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-{{ .Release.Name }}-dbsecret
+                  key: dbuserpass
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          name: mysql
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          ports:
+            - containerPort: 33060
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-persistent-storage
+            - mountPath: /etc/mysql/conf.d
+              name: mysql-server-conf
+            - mountPath: /docker-entrypoint-initdb.d
+              name: mysql-server-initdb
+          resources:
+            requests:
+              cpu: 100m
+              memory: 800Mi
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-{{ .Release.Name }}-pv-claim
+        - name: mysql-server-conf
+          configMap:
+            name: mysql-{{ .Release.Name }}-dbconf
+        - name: mysql-server-initdb
+          configMap:
+            name: mysql-{{ .Release.Name }}-dbinit
