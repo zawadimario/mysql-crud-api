@@ -4,7 +4,7 @@ metadata:
   name: mysql-{{ .Release.Name }}-dbinit
   namespace: {{ .Release.Namespace }}
 data:
-  host: mysql-{{ .Release.Name }}-db-svc.{{ .Release.Namespace }}.svc.cluster.local
+  host: mysql-{{ .Release.Name }}-database-svc.{{ .Release.Namespace }}.svc.cluster.local
   createdb.sql: |
     create database {{ .Values.auth.db_name | default .Release.Name }};
     grant all privileges on {{ .Values.auth.db_name | default .Release.Name }}.* to '{{ .Values.auth.username | default "testuser"}}'@'%';

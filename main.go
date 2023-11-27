@@ -13,7 +13,6 @@ import (
 
 func main() {
 	db := database.Init()
-
 	defer database.CloseDB(db)
 
 	router := mux.NewRouter()

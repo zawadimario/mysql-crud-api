@@ -3,12 +3,13 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
-var db *sql.DB
+var Conn *sql.DB
 
 func Init() *sql.DB {
 	err := godotenv.Load()
@@ -26,18 +27,18 @@ func Init() *sql.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
 
 	// Get a database handle
-	db, err = sql.Open("mysql", dsn)
+	Conn, err = sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
-	pingErr := db.Ping()
+	pingErr := Conn.Ping()
 	if pingErr != nil {
 		log.Fatal(pingErr)
 	}
 	fmt.Println("Connected!")
-
-	return db
+	return Conn
 }
+
 func CloseDB(db *sql.DB) {
 	err := db.Close()
 	if err != nil {
