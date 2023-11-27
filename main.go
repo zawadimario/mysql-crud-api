@@ -19,12 +19,12 @@ func main() {
 	router := mux.NewRouter()
 
 	// Define your routes
-	router.HandleFunc("/albums", handlers.GetAlbums).Methods("GET")
-	router.HandleFunc("/albums/{id}", handlers.GetAlbumById).Methods("GET")
-	router.HandleFunc("/albums/artist/{artist}", handlers.GetAlbumByArtist).Methods("GET")
-	router.HandleFunc("/albums", handlers.CreateAlbum).Methods("POST")
-	router.HandleFunc("/albums/{id}", handlers.UpdateAlbum).Methods("PUT")
-	router.HandleFunc("/albums/{id}", handlers.DeleteAlbum).Methods("DELETE")
+	router.HandleFunc("/albums", handlers.GetAlbums).Methods(http.MethodGet)
+	router.HandleFunc("/albums/{id}", handlers.GetAlbumById).Methods(http.MethodGet)
+	router.HandleFunc("/albums/artist/{artist}", handlers.GetAlbumByArtist).Methods(http.MethodGet)
+	router.HandleFunc("/albums", handlers.CreateAlbum).Methods(http.MethodPost)
+	router.HandleFunc("/albums/{id}", handlers.UpdateAlbum).Methods(http.MethodPost)
+	router.HandleFunc("/albums/{id}", handlers.DeleteAlbum).Methods(http.MethodDelete)
 
 	fmt.Printf("Starting server at port 8000\n")
 	log.Fatal(http.ListenAndServe(":8000", router))
