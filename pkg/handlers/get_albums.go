@@ -8,7 +8,7 @@ import (
 	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
-func GetAlbums(w http.ResponseWriter, r *http.Request) {
+func GetAlbums(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	albums, err := getAllAbums(db)
