@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
 	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
@@ -21,7 +22,7 @@ func GetAlbumById(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid album ID", http.StatusBadRequest)
 		return
 	}
-	album, err := albumByID(id, db)
+	album, err := albumByID(id, database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error retrieving album: %v", err), http.StatusInternalServerError)
 		return
