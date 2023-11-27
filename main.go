@@ -1,13 +1,14 @@
 package main
 
 import (
-	"example/data-access/pkg/database"
-	"example/data-access/pkg/handlers"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
+	"github.com/zawadimario/mysql-crud-api/pkg/handlers"
 )
 
 func main() {

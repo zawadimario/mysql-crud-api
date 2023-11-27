@@ -3,9 +3,10 @@ package handlers
 import (
 	"database/sql"
 	"encoding/json"
-	"example/data-access/pkg/models"
 	"fmt"
 	"net/http"
+
+	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
 var db *sql.DB

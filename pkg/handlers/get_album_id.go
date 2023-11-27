@@ -4,11 +4,12 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
-	"example/data-access/pkg/models"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
 func GetAlbumById(w http.ResponseWriter, r *http.Request) {

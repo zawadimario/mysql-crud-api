@@ -3,10 +3,11 @@ package handlers
 import (
 	"database/sql"
 	"encoding/json"
-	"example/data-access/pkg/models"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
 func CreateAlbum(w http.ResponseWriter, r *http.Request) {
