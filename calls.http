@@ -5,7 +5,7 @@ GET http://localhost:8000/albums
 GET http://localhost:8000/albums/3
 
 
-### Get album by ID
+### Get album by name
 GET http://localhost:8000/albums/artist/John Coltrane
 
 ### create album
