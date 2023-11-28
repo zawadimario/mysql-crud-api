@@ -56,7 +56,7 @@ func albumsByArtist(name string, db *sql.DB) ([]models.Album, error) {
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
 		var alb models.Album
-		if err := rows.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price); err != nil {
+		if err := rows.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price, &alb.LastUpdate); err != nil {
 			return nil, fmt.Errorf("albumsByArtist %q: %v", name, err)
 		}
 		albums = append(albums, alb)

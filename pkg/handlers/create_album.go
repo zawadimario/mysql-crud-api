@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -20,7 +21,7 @@ func CreateAlbum(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("Invalid request payload: %v", err), http.StatusBadRequest)
 		return
 	}
-	id, err := addAlbum(newAlbum, db)
+	id, err := addAlbum(newAlbum, database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error creating album: %v", err), http.StatusInternalServerError)
 		return

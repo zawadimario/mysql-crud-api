@@ -14,7 +14,7 @@ import (
 func GetAlbums(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	albums, err := getAllAbums(database.Conn)
+	albums, err := getAllAlbums(database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error retrieving albums: %v", err), http.StatusInternalServerError)
 		return
@@ -34,10 +34,10 @@ func GetAlbums(w http.ResponseWriter, _ *http.Request) {
 	w.Write(jsonResponse)
 
 }
-func getAllAbums(db *sql.DB) ([]models.Album, error) {
+func getAllAlbums(db *sql.DB) ([]models.Album, error) {
 	var albums []models.Album
 
-	rows, err := db.Query("SELECT * FROM recordings.album")
+	rows, err := db.Query("SELECT * FROM recordings.album ORDER BY ID")
 	if err != nil {
 		return nil, fmt.Errorf("getAllAlbums: %v", err)
 	}
@@ -50,7 +50,7 @@ func getAllAbums(db *sql.DB) ([]models.Album, error) {
 
 	for rows.Next() {
 		var alb models.Album
-		if err := rows.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price); err != nil {
+		if err := rows.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price, &alb.LastUpdate); err != nil {
 			return nil, fmt.Errorf("getAllAlbums: %v", err)
 		}
 		albums = append(albums, alb)
