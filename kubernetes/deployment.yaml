@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-crudapi
+  labels:
+    app: crudapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crudapi
+  template:
+    metadata:
+      labels:
+        app: crudapi
+    spec:
+      serviceAccount: default
+      containers:
+      - name: server
+        image: zawadimario/mysql-crud-api:v1.0
+        ports:
+        - containerPort: 8000
