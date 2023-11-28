@@ -5,7 +5,7 @@ metadata:
   labels:
     app: crudapi
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: crudapi
@@ -16,7 +16,18 @@ spec:
     spec:
       serviceAccount: default
       containers:
-      - name: server
-        image: zawadimario/mysql-crud-api:v1.0
-        ports:
-        - containerPort: 8000
+        - name: server
+          image: zawadimario/mysql-crud-api:v1.0
+          ports:
+          - containerPort: 8000
+          env:
+          - name: DB_USER
+            value: "root"
+          - name: DB_PASSWORD
+            value: "password"
+          - name: DB_NAME
+            value: "recordings"
+          - name: DB_HOST
+            value: "<change-here>"
+          - name: DB_PORT
+            value: "3306"
