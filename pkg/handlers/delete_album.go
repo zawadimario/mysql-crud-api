@@ -3,9 +3,11 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
 )
 
 func DeleteAlbum(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +19,7 @@ func DeleteAlbum(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid album ID", http.StatusBadRequest)
 		return
 	}
-	err = deleteAlbumByID(id, db)
+	err = deleteAlbumByID(id, database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error deleting album: %v", err), http.StatusInternalServerError)
 		return

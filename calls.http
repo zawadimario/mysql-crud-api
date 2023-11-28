@@ -1,0 +1,29 @@
+### Get all albums
+GET http://localhost:8000/albums
+
+### Get album by ID
+GET http://localhost:8000/albums/3
+
+
+### Get album by name
+GET http://localhost:8000/albums/artist/John Coltrane
+
+### create album
+POST http://localhost:8000/albums
+Content-Type: application/json
+
+{
+  "artist": ""
+}
+
+### update album
+POST http://localhost:8000/albums/1
+Content-Type: application/json
+
+{
+  "artist": ""
+}
+
+### delete album
+DELETE http://localhost:8000/albums
+

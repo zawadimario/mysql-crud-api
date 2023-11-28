@@ -5,13 +5,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/labstack/gommon/log"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
 	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
 func GetAlbums(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	albums, err := getAllAbums(db)
+	albums, err := getAllAbums(database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error retrieving albums: %v", err), http.StatusInternalServerError)
 		return
@@ -41,13 +44,13 @@ func getAllAbums(db *sql.DB) ([]models.Album, error) {
 	defer func(rows *sql.Rows) {
 		err := rows.Close()
 		if err != nil {
-
+			log.Errorf("closing connection :%v", err)
 		}
 	}(rows)
 
 	for rows.Next() {
 		var alb models.Album
-		if err := rows.Scan(&alb.ID, &alb.Artist, &alb.Price); err != nil {
+		if err := rows.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price); err != nil {
 			return nil, fmt.Errorf("getAllAlbums: %v", err)
 		}
 		albums = append(albums, alb)

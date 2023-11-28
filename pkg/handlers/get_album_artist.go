@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/gorilla/mux"
+	"github.com/zawadimario/mysql-crud-api/pkg/database"
 	"github.com/zawadimario/mysql-crud-api/pkg/models"
 )
 
@@ -13,16 +15,10 @@ var db *sql.DB
 
 func GetAlbumByArtist(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var request struct {
-		Artist string `json:"artist"`
-	}
 
-	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&request); err != nil {
-		http.Error(w, fmt.Sprintf("Invalid request payload: %v", err), http.StatusBadRequest)
-		return
-	}
-	albums, err := albumsByArtist(request.Artist, db)
+	vars := mux.Vars(r)
+	artists := vars["artist"]
+	albums, err := albumsByArtist(artists, database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error retrieving albums: %v", err), http.StatusInternalServerError)
 		return
