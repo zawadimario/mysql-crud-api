@@ -4,7 +4,7 @@ metadata:
   name: mysql-{{ .Release.Name }}-dbinit
   namespace: {{ .Release.Namespace }}
 data:
-  host: mysql-{{ .Release.Name }}-database-svc.{{ .Release.Namespace }}.svc.cluster.local
+  host: mysql-{{ .Release.Name }}-db-svc.{{ .Release.Namespace }}.svc.cluster.local
   createdb.sql: |
     create database {{ .Values.auth.db_name | default .Release.Name }};
     grant all privileges on {{ .Values.auth.db_name | default .Release.Name }}.* to '{{ .Values.auth.username | default "testuser"}}'@'%';
@@ -28,11 +28,12 @@ data:
         Title varchar(128) not null,
         Artist varchar(255) not null,
         Price decimal(5, 2) not null,
+        LastUpdate timestamp not null default current_timestamp on update current_timestamp,
         primary key (id),
         unique key (title, artist, price)
     );
     insert into recordings.album
-    (title, artist, price)
+    (Title, Artist, Price)
     values
         ('Blue Train', 'John Coltrane', 56.99),
         ('Giant Steps', 'John Coltrane', 63.99),

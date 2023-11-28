@@ -5,7 +5,7 @@ GET http://localhost:8000/albums
 GET http://localhost:8000/albums/3
 
 
-### Get album by name
+### Get album by ID
 GET http://localhost:8000/albums/artist/John Coltrane
 
 ### create album
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### update album
-POST http://localhost:8000/albums/1
+PUT http://localhost:8000/albums/9
 Content-Type: application/json
 
 {

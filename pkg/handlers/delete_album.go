@@ -14,12 +14,12 @@ func DeleteAlbum(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	vars := mux.Vars(r)
-	id, err := strconv.ParseInt(vars["id"], 10, 64)
+	id, err := strconv.ParseUint(vars["id"], 10, 64)
 	if err != nil {
 		http.Error(w, "Invalid album ID", http.StatusBadRequest)
 		return
 	}
-	err = deleteAlbumByID(id, database.Conn)
+	err = deleteAlbumByID(int64(id), database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error deleting album: %v", err), http.StatusInternalServerError)
 		return

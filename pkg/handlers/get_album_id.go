@@ -48,11 +48,11 @@ func albumByID(id int64, db *sql.DB) (models.Album, error) {
 	var alb models.Album
 
 	row := db.QueryRow("SELECT * FROM recordings.album WHERE id = ?", id)
-	if err := row.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price); err != nil {
+	if err := row.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price, &alb.LastUpdate); err != nil {
 		if errors.Is(sql.ErrNoRows, err) {
-			return alb, fmt.Errorf("albumsById %d: no such album", id)
+			return alb, fmt.Errorf("album with ID '%d' was not found", id)
 		}
-		return alb, fmt.Errorf("albumById %d: %v", id, err)
+		return alb, fmt.Errorf("album ID not found %d: %v", id, err)
 	}
 	return alb, nil
 }

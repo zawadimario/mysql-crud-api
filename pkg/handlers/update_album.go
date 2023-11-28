@@ -16,7 +16,7 @@ func UpdateAlbum(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	vars := mux.Vars(r)
-	id, err := strconv.ParseInt(vars["id"], 10, 64)
+	id, err := strconv.ParseUint(vars["id"], 10, 64)
 	if err != nil {
 		http.Error(w, "Invalid album ID", http.StatusBadRequest)
 		return
@@ -27,7 +27,7 @@ func UpdateAlbum(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("Invalid request payload: %v", err), http.StatusBadRequest)
 		return
 	}
-	err = updateAlbumById(id, updatedAlbum, database.Conn)
+	err = updateAlbumById(int64(id), updatedAlbum, database.Conn)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error updating album: %v", err), http.StatusInternalServerError)
 		return
