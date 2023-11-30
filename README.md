@@ -2,7 +2,7 @@
 This is a simple Go crud that creates/updates/deletes/list albums from a MySQL Database that contain the Album name and ID, Artist Name and Price.
 
 ## Deploy MySQL DB
-Ensure you have a kubernetes cluster running. Deploy Mysql to an existing repository or just to default namespace.
+Ensure you have a Kubernetes cluster running. Deploy Mysql to an existing repository or just to the default namespace.
 
 From the root directory run the following command
 ```
@@ -24,7 +24,7 @@ From the root directory
 
 Go Version 1.21.4
 ```
-go run main.go
+go run cmd/main.go
 ```
 Alternatively, build the binary and run it
 ```
@@ -32,4 +32,4 @@ go build -o my-app .
 ./my-app
 ```
 
-You'll see a pop-up window prompting you to allow the application to receive incomming connections. Allow it.
+You'll see a pop-up window prompting you to allow the application to receive incoming connections. Allow it.
