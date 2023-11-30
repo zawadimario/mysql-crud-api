@@ -28,7 +28,7 @@ go run cmd/main.go
 ```
 Alternatively, build the binary and run it
 ```
-go build -o my-app .
+go build -o my-app cmd/main.go
 ./my-app
 ```
 
