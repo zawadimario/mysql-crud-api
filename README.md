@@ -22,7 +22,7 @@ kubectl port-forward -n <namespace> svc/<mysql-service-name> 3306:3306
 ## Run your Go Crud
 From the root directory
 
-Go Version 1.21.4
+Go Version 1.22.4
 ```
 go run cmd/main.go
 ```
