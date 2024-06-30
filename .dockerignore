@@ -20,5 +20,3 @@ terraform
 *.tfstate.*
 *_override.tf
 *_override.tf.json
-go.mod
-go.sum
