@@ -1,0 +1,7 @@
+owner: zawadimario
+git-base-url: https://api.github.com/
+git-upload-url: https://github.com/zawadimario/mysql-crud-api
+git-repo: mysql-crud-api
+packages-with-index: true
+package-path: .crudapi
+skip-if-exists: true

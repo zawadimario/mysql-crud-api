@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-crudapi
+  labels:
+    app: {{ .Release.Name }}-crudapi
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-crudapi
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-crudapi
+    spec:
+      serviceAccount: default
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.imagePullPolicy | default "IfNotPresent" }}
+          ports:
+          - containerPort: {{ .Values.service.port }}
+          env:
+          # Note that the below values are obtained from values.yaml file under mysql-helm directory
+          # and can be populated into .env file for local testing
+          - name: DB_USER
+            value: {{ .Values.mysql.dbUser | quote }}
+          - name: DB_PASSWORD
+            value: {{ .Values.mysql.dbPassword | quote }}
+          - name: DB_NAME
+            value: {{ .Values.mysql.dbName | quote }}
+          - name: DB_HOST
+            value: {{ .Values.mysql.dbHost | quote }}
+          - name: DB_PORT
+            value: {{ .Values.mysql.dbPort | quote }}

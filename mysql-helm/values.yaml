@@ -29,7 +29,7 @@ containerArguments: |-
 
 # Defile PVC specs
 persistentResources:
-  storage: 20Gi
+  storage: 5Gi
   accessModes: ReadWriteOnce
 
 # Define K8s service specs

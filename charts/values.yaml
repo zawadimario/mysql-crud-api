@@ -1,0 +1,40 @@
+# Image values
+image:
+  repository: zawadimario/mysql-crud-api # Should be the same as the name of the image before colons
+  # Do not manually change this tag because GitHub workflows will take care of it.
+  tag: v1.0.0
+  imagePullPolicy: ""
+
+# Overrides for replicas. Use a number if you need to be specific
+# e.g, replicaCount: 2
+replicaCount: 1
+
+# Overrides for countainer resources
+# Change the values for resources as per API requirements
+# Include units
+resources:
+  cpuRequests: ""
+  memoryRequests: ""
+  cpuLimits: ""
+  memoryLimits: ""
+
+# Define k8s service
+service:
+  type: NodePort
+  port: 8000
+  targetPort: 8000
+  nodePort: 32134
+
+# Define HPA if you want to be specific. Currently 5 is the default maxReplicas. To modify the
+# value, assign a suitable number or replicas e.g., hpaMaxReplicaCount: 7
+hpaMaxReplicaCount: ""
+# Specify a suitable % value for CPU Utilization cap e.g., hpaCPUUtilizationCap: 80
+# Default is set to 80
+hpaCPUUtilizationCap: ""
+
+mysql:
+  dbUser: "tectel"
+  dbPassword: "tectel"
+  dbHost: mysql-tectel-db-svc.gocrudapi.svc.cluster.local"
+  dbName: "sakila"
+  dbPort: "3306"
