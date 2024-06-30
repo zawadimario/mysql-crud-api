@@ -2,7 +2,7 @@ apiVersion: v2
 appVersion: "v1.0.0"
 name: crudapi
 version: 1.0.0
-description: Deploy a simple ML API application
+description: Deploy a MySQL CRUD API application
 type: application
 maintainers:
   - name: zawadi-omari

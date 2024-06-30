@@ -30,7 +30,7 @@ jobs:
       - name: Read current image tag
         id: read_tag
         run: |
-          tag=$(awk '/tag:/ { print $2 }' ./charts/values.yaml)
+          tag=$(awk '/tag:/ { print $2 }' ./charts/golangapi/values.yaml)
           echo "::set-output name=tag::$tag"
 
       # Increment the image tag in the format v1.0.0 -> v1.0.1
@@ -49,14 +49,14 @@ jobs:
       # Update values.yaml with the new image tag
       - name: Update values.yaml
         run: |
-          sed -i "s/tag: ${{ steps.read_tag.outputs.tag }}/tag: ${{ steps.increment_tag.outputs.next_tag }}/" ./charts/values.yaml
+          sed -i "s/tag: ${{ steps.read_tag.outputs.tag }}/tag: ${{ steps.increment_tag.outputs.next_tag }}/" ./charts/golangapi/values.yaml
       
       # Commit and push changes to GitHub
       - name: Commit and push changes
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add ./charts/values.yaml
+          git add ./charts/golangapi/values.yaml
           git commit -m "Increment image tag to ${{ steps.increment_tag.outputs.next_tag }}"
           git push
       

@@ -1,2 +1,14 @@
 .idea
 .DS_Store
+*.DS_Store
+# IDE dirs and files
+.project
+.vscode/
+
+# Terraform workspace related files
+*.terraform
+*.terraform.lock.hcl
+*.tfstate*
+*.tfstate.*
+*_override.tf
+*_override.tf.json

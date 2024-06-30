@@ -1,7 +1,7 @@
 remote: origin
 target-branch: main
 chart-dirs:
-  - charts
+  - charts/golangapi
 chart-repos:
   - mysql-crud-api=https://github.com/zawadimario/
 helm-extra-args: --timeout 600s
