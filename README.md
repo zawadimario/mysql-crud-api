@@ -6,11 +6,11 @@ Ensure you have a Kubernetes cluster running. Deploy Mysql to an existing reposi
 
 From the root directory run the following command
 ```
-helm install <release-name> .charts/mysql -n <namespace>
+helm install <release-name> ./mysql -n <namespace>
 
 #OR
 
-helm install <release-name> .charts/mysql
+helm install <release-name> ./mysql
 kubectl get pods -A | grep <release-name>
 kubectl get svc -A | grep <release-name>
 ```
