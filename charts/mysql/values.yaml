@@ -34,6 +34,6 @@ persistentResources:
 
 # Define K8s service specs
 service:
-  type: NodePort
+  type: "" #NodePort
   nodePort: 31214
   port: 3306
