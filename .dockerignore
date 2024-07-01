@@ -3,7 +3,6 @@
 charts
 *.gitignore
 *.DS_Store
-.env
 ct.yaml
 cr.yaml
 .dockerignore

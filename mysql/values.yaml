@@ -9,7 +9,7 @@ replicaCount: 1
 
 # Define database properties
 auth:
-  db_name: sakila
+  dbname: sakila
   username: tectel
   password: tectel
   rootPassword: password

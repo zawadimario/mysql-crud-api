@@ -2,7 +2,7 @@
 image:
   repository: zawadimario/mysql-crud-api # Should be the same as the name of the image before colons
   # Do not manually change this tag because GitHub workflows will take care of it.
-  tag: v1.0.1
+  tag: v1.0.0
   imagePullPolicy: ""
 
 # Overrides for replicas. Use a number if you need to be specific
@@ -33,8 +33,8 @@ hpaMaxReplicaCount: ""
 hpaCPUUtilizationCap: ""
 
 mysql:
-  dbUser: tectel
-  dbPassword: tectel
-  dbHost: mysql-mysql-db-svc.gocrudapi.svc.cluster.local
-  dbName: sakila
-  dbPort: 3306
+  dbUser: "tectel"
+  dbPassword: "tectel"
+  dbHost: "mysql-tectel-db-svc.gocrudapi.svc.cluster.local"
+  dbName: "recordings"
+  dbPort: "3306"

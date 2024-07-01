@@ -5,7 +5,7 @@ Your release is named {{ .Release.Name }}.
 
 To learn more about this release, try:
 
-  $ helm status {{ .Release.Name }}
+  $ helm status -n {{ .Release.Namespace }} {{ .Release.Name }}
   $ helm list -n {{ .Release.Namespace }} {{ .Release.Name }}
 
 To check the status of the deployed resources, try:
